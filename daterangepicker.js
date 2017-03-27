@@ -9,12 +9,11 @@
 (function(root, factory) {
 
   if (typeof define === 'function' && define.amd) {
-    define(['moment', 'jquery', 'exports'], function(momentjs, $, exports) {
-      root.daterangepicker = factory(root, exports, momentjs, $);
+    define(['jquery', 'exports'], function($, exports) {
+      root.daterangepicker = factory(root, exports, root.moment || moment, $);
     });
 
   } else if (typeof exports !== 'undefined') {
-    var momentjs = require('moment');
     var jQuery;
     try {
       jQuery = require('jquery');
@@ -23,7 +22,7 @@
       if (!jQuery) throw new Error('jQuery dependency not found');
     }
 
-    factory(root, exports, momentjs, jQuery);
+    factory(root, exports, root.moment || moment, jQuery);
 
   // Finally, as a browser global.
   } else {
